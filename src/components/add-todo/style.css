@@ -1,0 +1,40 @@
+.wrapper {
+  width: 400px;
+}
+
+.wrapper::after {
+    content:" ";
+    display:table;
+    clear:both;
+}
+
+.submit {
+  width: 40px;
+  line-height: 40px;
+  background-color: #4286f4;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px #000000;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  float: left
+}
+.submit:hover {
+  background-color: #2d77ef;
+}
+
+.input {
+  font-size: 18px;
+  line-height: 38px;
+  width: 360px;
+  padding: 0px;
+  border: 1px solid #2d77ef;
+  margin: 0px;
+  display: inline-block;
+  position: relative;
+  float: left
+}
