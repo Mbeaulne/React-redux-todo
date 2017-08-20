@@ -7,8 +7,8 @@ import {
 
 import {
   setDisplay,
-  addTodo,
-  clearComplete,
+  setTodo,
+  resetTodosFromLS,
   toggleDisplayMenu,
   toggleComplete
 } from '../actions/ui.js';
@@ -22,7 +22,7 @@ const updateDisplay = payload => todo => todo.id === payload ? {
 const uiReducer = createReducer({
   [toggleDisplayMenu]: state => ({ ...state, displayMenu: !state.displayMenu }),
   [setDisplay]: (state, payload) => ({ ...state, display: payload }),
-  [addTodo]: (state, payload) => ({ ...state, todos: [
+  [setTodo]: (state, payload) => ({ ...state, todos: [
       ...state.todos,
       {
         id: payload.id,
@@ -31,7 +31,7 @@ const uiReducer = createReducer({
       }
     ]
   }),
-  [clearComplete]: state => ({ ...state, todos: R.reject(isComplete, state.todos) }),
+  [resetTodosFromLS]: (state, payload) => ({ ...state, todos: R.reject(isComplete, state.todos) }),
   [toggleComplete]: (state, payload) => ({ ...state, todos: R.map(updateDisplay(payload), state.todos) }),
 }, DEFAULT_UI_STATE);
 

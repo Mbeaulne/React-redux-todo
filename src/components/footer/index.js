@@ -7,14 +7,18 @@ import DisplayMenu from '../display-menu';
 export default ({
   clearComplete,
   disable,
-  display
+  display,
+  todos
 }) => (
   <div className={styles.footer}>
     <div className={styles.displayMenu}>
       <DisplayMenu display={display} />
     </div>
     <div className={styles.clearCompleteBtn}>
-      <ClearComplete clearComplete={clearComplete} disable={disable} />
+      <ClearComplete
+        todos={todos}
+        clearComplete={clearComplete}
+        disable={disable} />
     </div>
   </div>
 );

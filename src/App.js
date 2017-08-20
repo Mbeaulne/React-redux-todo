@@ -21,7 +21,7 @@ const isDisplayed = display => x => R.or(
 );
 
 const displayByFilter = (todos, display) => R.filter(isDisplayed(display), todos);
-const getCompleteCount = R.none(x => x.display === 'complete');
+const noCompleteExist = R.none(x => x.display === 'complete');
 
 const App = ({
     todos,
@@ -33,11 +33,14 @@ const App = ({
     <div className="App">
       <div className={styles.todoWrapper}>
         <AddTodo onAddTodo={onAddTodo} />
-        <TodoList toggleComplete={onToggleComplete} todos={displayByFilter(todos, display)}/>
+        <TodoList
+          toggleComplete={onToggleComplete}
+          todos={displayByFilter(todos, display)} />
         <Footer
           display={display}
           clearComplete={onClearComplete}
-          disable={getCompleteCount(todos)} />
+          todos={todos}
+          disable={noCompleteExist(todos)} />
       </div>
     </div>
   );

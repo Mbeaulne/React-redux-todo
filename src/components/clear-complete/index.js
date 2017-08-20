@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-export default ({ disable, clearComplete }) => (
+export default ({ disable, clearComplete, todos }) => (
   <Button
-    onClick={ () => clearComplete() }
+    onClick={ () => clearComplete(todos) }
     disabled={disable}
     bsStyle="primary">
     Clear complete
