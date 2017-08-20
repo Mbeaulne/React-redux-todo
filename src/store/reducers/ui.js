@@ -1,5 +1,4 @@
 import { createReducer } from 'redux-act';
-import R from 'ramda';
 
 import {
   DEFAULT_UI_STATE
@@ -8,16 +7,9 @@ import {
 import {
   setDisplay,
   setTodo,
-  resetTodosFromLS,
-  toggleDisplayMenu,
-  toggleComplete
+  overrideTodoWithNewState,
+  toggleDisplayMenu
 } from '../actions/ui.js';
-
-const isComplete = x => x.display === 'complete';
-const updateDisplay = payload => todo => todo.id === payload ? {
-  ...todo,
-  display: todo.display === 'complete' ? 'active' : 'complete'
-} : todo;
 
 const uiReducer = createReducer({
   [toggleDisplayMenu]: state => ({ ...state, displayMenu: !state.displayMenu }),
@@ -31,8 +23,7 @@ const uiReducer = createReducer({
       }
     ]
   }),
-  [resetTodosFromLS]: (state, payload) => ({ ...state, todos: R.reject(isComplete, state.todos) }),
-  [toggleComplete]: (state, payload) => ({ ...state, todos: R.map(updateDisplay(payload), state.todos) }),
+  [overrideTodoWithNewState]: (state, payload) => ({ ...state, todos: payload }),
 }, DEFAULT_UI_STATE);
 
 export default uiReducer;
