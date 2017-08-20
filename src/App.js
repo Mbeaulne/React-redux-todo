@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { Button } from 'react-bootstrap';
 import R from 'ramda';
 
 import AddTodo from './components/add-todo';
+import ClearComplete from './components/clear-complete';
 import DisplayMenu from './components/display-menu';
 import TodoList from './components/todo-list';
 
@@ -22,7 +22,7 @@ const isDisplayed = display => x => R.or(
 );
 
 const displayByFilter = (todos, display) => R.filter(isDisplayed(display), todos);
-const getCompleteCount = R.none(x => x.display === 'complete')
+const getCompleteCount = R.none(x => x.display === 'complete');
 
 const App = ({
     todos,
@@ -30,19 +30,16 @@ const App = ({
     onAddTodo,
     onClearComplete,
     onToggleComplete
-  }) => <div className="App">
-  <div className={styles.todoWrapper}>
-    <AddTodo onAddTodo={onAddTodo} />
-    <TodoList toggleComplete={onToggleComplete} todos={displayByFilter(todos, display)}/>
-    <DisplayMenu display={display} />
-    <Button
-      onClick={ () => onClearComplete() }
-      disabled={getCompleteCount(todos)}
-      bsStyle="primary">
-      Clear complete
-    </Button>
-  </div>
-</div>;
+  }) => (
+    <div className="App">
+      <div className={styles.todoWrapper}>
+        <AddTodo onAddTodo={onAddTodo} />
+        <TodoList toggleComplete={onToggleComplete} todos={displayByFilter(todos, display)}/>
+        <DisplayMenu display={display} />
+        <ClearComplete clearComplete={onClearComplete} disable={getCompleteCount(todos)} />
+      </div>
+    </div>
+  );
 
 const mapStateToProps = ({ uiReducer }) => ({
   todos: uiReducer.todos,
