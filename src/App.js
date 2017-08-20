@@ -35,8 +35,14 @@ const App = ({
       <div className={styles.todoWrapper}>
         <AddTodo onAddTodo={onAddTodo} />
         <TodoList toggleComplete={onToggleComplete} todos={displayByFilter(todos, display)}/>
-        <DisplayMenu display={display} />
-        <ClearComplete clearComplete={onClearComplete} disable={getCompleteCount(todos)} />
+        <div className={styles.footer}>
+          <div className={styles.displayMenu}>
+            <DisplayMenu display={display} />
+          </div>
+          <div className={styles.clearCompleteBtn}>
+            <ClearComplete clearComplete={onClearComplete} disable={getCompleteCount(todos)} />
+          </div>
+        </div>
       </div>
     </div>
   );
