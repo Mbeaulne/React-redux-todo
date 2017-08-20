@@ -4,9 +4,8 @@ import { compose } from 'recompose';
 import R from 'ramda';
 
 import AddTodo from './components/add-todo';
-import ClearComplete from './components/clear-complete';
-import DisplayMenu from './components/display-menu';
 import TodoList from './components/todo-list';
+import Footer from './components/footer'
 
 import {
   addTodo,
@@ -35,14 +34,10 @@ const App = ({
       <div className={styles.todoWrapper}>
         <AddTodo onAddTodo={onAddTodo} />
         <TodoList toggleComplete={onToggleComplete} todos={displayByFilter(todos, display)}/>
-        <div className={styles.footer}>
-          <div className={styles.displayMenu}>
-            <DisplayMenu display={display} />
-          </div>
-          <div className={styles.clearCompleteBtn}>
-            <ClearComplete clearComplete={onClearComplete} disable={getCompleteCount(todos)} />
-          </div>
-        </div>
+        <Footer
+          display={display}
+          clearComplete={onClearComplete}
+          disable={getCompleteCount(todos)} />
       </div>
     </div>
   );

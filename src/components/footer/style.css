@@ -1,0 +1,14 @@
+.footer {
+	width: 100%;
+	margin-top: 25px;
+}
+.footer div {
+	width: 50%;
+	display: inline-block;
+}
+.displayMenu {
+	text-align: left;
+}
+.clearCompleteBtn {
+	text-align: right;
+}
