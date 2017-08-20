@@ -22,7 +22,7 @@ export default compose(
   withHandlers({
     updateTodo: ({ setTodo }) => x => setTodo(x),
     onSubmit: ({onAddTodo, setTodo }) => todo => {
-      todo ? onAddTodo({ 'label': todo, 'id': uuid() }) : '';
+      if (todo)  onAddTodo({ 'label': todo, 'id': uuid() });
       setTodo('');
     }
   })
