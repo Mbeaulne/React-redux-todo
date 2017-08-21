@@ -10,6 +10,7 @@ const localStorageMock = {
   setItem: jest.fn(),
   clear: jest.fn()
 };
+
 global.localStorage = localStorageMock;
 
 describe('ui Reducer', () => {
