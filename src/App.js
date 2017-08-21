@@ -5,7 +5,7 @@ import R from 'ramda';
 
 import AddTodo from './components/add-todo';
 import TodoList from './components/todo-list';
-import Footer from './components/footer'
+import Footer from './components/footer';
 
 import {
   addTodo,
@@ -24,26 +24,26 @@ const displayByFilter = (todos, display) => R.filter(isDisplayed(display), todos
 const noCompleteExist = R.none(x => x.display === 'complete');
 
 const App = ({
-    todos,
-    display,
-    onAddTodo,
-    onClearComplete,
-    onToggleComplete
-  }) => (
-    <div className="App">
+  todos,
+  display,
+  onAddTodo,
+  onClearComplete,
+  onToggleComplete
+}) => (
+  <div className="App">
       <div className={styles.todoWrapper}>
-        <AddTodo onAddTodo={onAddTodo} />
-        <TodoList
-          toggleComplete={onToggleComplete}
-          todos={displayByFilter(todos, display)} />
-        <Footer
-          display={display}
-          clearComplete={onClearComplete}
-          todos={todos}
-          disable={noCompleteExist(todos)} />
-      </div>
+      <AddTodo onAddTodo={onAddTodo} />
+      <TodoList
+        toggleComplete={onToggleComplete}
+        todos={displayByFilter(todos, display)} />
+      <Footer
+        display={display}
+        clearComplete={onClearComplete}
+        todos={todos}
+        disable={noCompleteExist(todos)} />
     </div>
-  );
+  </div>
+);
 
 const mapStateToProps = ({ uiReducer }) => ({
   todos: uiReducer.todos,

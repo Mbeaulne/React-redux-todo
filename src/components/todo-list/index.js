@@ -1,7 +1,7 @@
 import React from 'react';
 import R from 'ramda';
 
-import Todo from '../todo'
+import Todo from '../todo';
 
 export default ({todos, toggleComplete}) => (
   <div className="App">

@@ -1,5 +1,5 @@
 import { createAction } from 'redux-act';
-import R from 'ramda'
+import R from 'ramda';
 
 export const setDisplay = createAction('SET_DISPLAY');
 export const setTodo = createAction('ADD_TODO');

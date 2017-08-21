@@ -1,6 +1,6 @@
 import React from 'react';
 import uuid from 'uuid/v1';
-import { withState, withHandlers, compose } from 'recompose'
+import { withState, withHandlers, compose } from 'recompose';
 import { Glyphicon } from 'react-bootstrap';
 
 import styles from './style.css';
@@ -15,7 +15,6 @@ const AddTodo = ({onSubmit, todo, updateTodo, onEnterPress}) => (
       className={styles.input}
       onChange={e => updateTodo(e.target.value)}
       onKeyPress={e => onEnterPress(e.charCode)} />
-
   </div>
 );
 

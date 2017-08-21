@@ -15,7 +15,8 @@ const MenuItm = ({ menuOption, action }) => (
       {menuOption}
     </div>
   </MenuItem>
-)
+);
+
 const Display = ({
   clickMenuOption,
   display,
