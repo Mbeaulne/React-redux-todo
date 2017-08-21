@@ -1,5 +1,3 @@
-import uuid from 'uuid/v1';
-
 export const DEFAULT_UI_STATE = {
   'todos': JSON.parse(localStorage.getItem('todos')) || [],
   'display': 'all',
