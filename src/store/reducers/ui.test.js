@@ -1,18 +1,16 @@
 import uuid from 'uuid/v1';
-
 import reducer from './ui';
-import {
-  setDisplay,
-  addTodo,
-  clearComplete,
-  toggleDisplayMenu,
-  toggleComplete
-} from '../actions/ui';
 
 import {
   DEFAULT_UI_STATE
 } from '../../common/constants.js';
 
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
+};
+global.localStorage = localStorageMock;
 
 describe('ui Reducer', () => {
   it('should return the initial state', () => {
@@ -101,126 +99,42 @@ describe('ui Reducer', () => {
     });
   });
 
-  it('should clear any completed ', () => {
-    const todos = [
-      {
-        'id': 1,
-        'label': 'write the content for the next module',
-        'display': 'complete'
-      },
-      {
-        'id': 2,
-        'label': 'buy cheese',
-        'display': 'complete'
-      },
-      {
-        'id':3,
-        'label': 'buy milk',
-        'display': 'active'
-      }
-    ]
+  it('should override todo state with new state', () => {
+    const id = uuid();
+    const oldid = uuid();
     expect(
-      reducer({todos}, {
-        'payload': 'all',
-        'type': 'CLEAR_COMPLETE'
+      reducer({todos: [
+        {
+          'payload': {
+            'id': oldid,
+            'label': 'old state',
+            'display': 'active'
+          }
+        }
+        ]}, {
+        'payload': [{
+          id,
+          'label': 'Our new awesome todo',
+          'display': 'active'
+        },
+        {
+          id,
+          'label': 'Our new awesome todo two',
+          'display': 'active'
+        }],
+        'type': 'OVERRIDE_TODOS_WITH_NEW_STATE'
       })
     ).toEqual({
-      todos: [{
-        'id':3,
-        'label': 'buy milk',
+      'todos': [{
+        id,
+        'label': 'Our new awesome todo',
+        'display': 'active'
+      },
+      {
+        id,
+        'label': 'Our new awesome todo two',
         'display': 'active'
       }]
-    });
-  });
-
-  it('should toggle state of a todo from active to complete', () => {
-    const todos = [
-      {
-        'id': 1,
-        'label': 'write the content for the next module',
-        'display': 'complete'
-      },
-      {
-        'id': 2,
-        'label': 'buy cheese',
-        'display': 'complete'
-      },
-      {
-        'id':3,
-        'label': 'buy milk',
-        'display': 'active'
-      }
-    ];
-
-    expect(
-      reducer({todos}, {
-        'payload': todos[2].id,
-        'type': 'TOGGLE_COMPLETE'
-      })
-    ).toEqual({
-      todos: [
-        {
-          'id': 1,
-          'label': 'write the content for the next module',
-          'display': 'complete'
-        },
-        {
-          'id': 2,
-          'label': 'buy cheese',
-          'display': 'complete'
-        },
-        {
-          'id':3,
-          'label': 'buy milk',
-          'display': 'complete'
-        }
-      ]
-    });
-  });
-
-
-  it('should toggle state of a todo from complete to active', () => {
-    const todos = [
-      {
-        'id': 1,
-        'label': 'write the content for the next module',
-        'display': 'complete'
-      },
-      {
-        'id': 2,
-        'label': 'buy cheese',
-        'display': 'complete'
-      },
-      {
-        'id':3,
-        'label': 'buy milk',
-        'display': 'active'
-      }
-    ];
-
-    expect(
-      reducer({todos}, {
-        'payload': todos[1].id,
-        'type': 'TOGGLE_COMPLETE'
-      })
-    ).toEqual({
-      todos: [
-        {
-          'id': 1,
-          'label': 'write the content for the next module',
-          'display': 'complete'
-        },
-        {
-          'id': 2,
-          'label': 'buy cheese',
-          'display': 'active'
-        },
-        {
-          'id':3,
-          'label': 'buy milk',
-          'display': 'active'
-        }
-      ]
     });
   });
 
